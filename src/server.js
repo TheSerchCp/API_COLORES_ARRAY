@@ -3,9 +3,11 @@ const app = express()
 const morgan = require('morgan');
 app.set('port',process.env.PORT || 3001);
 app.all('*',function(req,res,next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.removeHeader("x-powered-by");
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+    res.setHeader("Access-Control-Allow-Headers","Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     next()
 })
 app.use(morgan('dev'));  
